@@ -1,1 +1,4 @@
-python3: can't open file '/home/agent/log-redactor/log-redact.py': [Errno 2] No such file or directory
+Login ok user=[REDACTED:email] ip=[REDACTED:ip]
+api_key=[REDACTED]
+Authorization: Bearer [REDACTED:token]
+password=[REDACTED] retry=3

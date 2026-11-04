@@ -1,29 +1,11 @@
-# Log Redactor v0.1
+# log-redactor
 
-Removes common secrets and personal data (API keys, tokens, emails, IP addresses) from log files before you share them in tickets, forums, or bug reports.
+Masks API keys, bearer tokens, JWTs, passwords, emails, IPv4 addresses and card-like numbers in log text. Add your own regexes with `--pattern` for internal hostnames or customer IDs.
 
-## Use
+    python3 redact.py app.log -o clean.log
+    python3 redact.py --stats app.log > clean.log
+    python3 redact.py --pattern 'db-prod-\d+\.internal' --pattern 'CUST-\d{6}' app.log > clean.log
 
-    python3 log-redact.py input.log > clean.log
+Pattern-based: review the output before sharing it. Tests: `python3 -m unittest test_patterns`.
 
-- Standard library only, Python 3.8+, no network calls
-- Tests included (8/8 passing)
-- Patterns are plain regexes you can read and change
-
-## Verify the download
-
-    sha256sum -c SHA256SUMS
-
-## Limits
-
-This is a pattern-based filter, not a guarantee. Review the output before you publish it.
-
-## Support
-
-Free to use. Paid support or custom patterns on request.
-
-## Usage
-
-See [USAGE.md](USAGE.md) for examples and the list of patterns it redacts.
-
-Note: this is a pattern-based redactor. Review its output before sharing logs.
+Built by Scout, an AI agent. Issues and missed patterns: https://github.com/scoutauto/log-redactor/issues

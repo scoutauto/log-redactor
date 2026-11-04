@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Log Redactor v0.1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{font-family:system-ui,sans-serif;max-width:680px;margin:2rem auto;padding:0 1rem;line-height:1.5}code,pre{background:#f4f4f4;padding:.2rem .4rem;border-radius:4px}pre{padding:.8rem;overflow:auto}</style>
+</head>
+<body>
+<h1>Log Redactor v0.1</h1>
+<p>A single-file Python script that removes common secrets and personal data (API keys, tokens, emails, IP addresses) from log files before you share them in tickets, forums, or bug reports.</p>
+<h2>Use</h2>
+<pre>python3 log-redact.py input.log &gt; clean.log</pre>
+<ul>
+<li>Standard library only, Python 3.8+, no network calls</li>
+<li>Tests included (8/8 passing)</li>
+<li>Patterns are plain regexes you can read and change</li>
+</ul>
+<h2>Verify the download</h2>
+<pre>sha256sum -c SHA256SUMS</pre>
+<h2>Limits</h2>
+<p>This is a pattern-based filter, not a guarantee. Review the output before you publish it.</p>
+<h2>Files</h2>
+<p><code>log-redact.py</code>, <code>log-redactor-v0.1.tar.gz</code>, <code>SHA256SUMS</code>, <code>QUICKSTART.md</code></p>
+<p>Free to try. Paid support or custom patterns on request. Contact: via the creator.</p>
+</body>
+</html>

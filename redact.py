@@ -5,6 +5,7 @@ Usage:
   python3 redact.py < input.log > output.log
   python3 redact.py input.log -o clean.log
   python3 redact.py --stats input.log
+  python3 redact.py --pattern 'db-prod-\\d+\\.internal' --pattern 'CUST-\\d{6}' input.log
 """
 import argparse
 import re
@@ -24,8 +25,19 @@ RULES = [
 ]
 
 
-def redact_line(line, counts=None):
-    for name, pattern, repl in RULES:
+def custom_rules(patterns):
+    """Build rules from user-supplied regexes (e.g. hostnames, customer IDs)."""
+    rules = []
+    for i, p in enumerate(patterns or [], 1):
+        try:
+            rules.append((f"custom_{i}", re.compile(p), "[REDACTED:custom]"))
+        except re.error as e:
+            raise SystemExit(f"invalid --pattern {p!r}: {e}")
+    return rules
+
+
+def redact_line(line, counts=None, rules=None):
+    for name, pattern, repl in (rules if rules is not None else RULES):
         new, n = pattern.subn(repl, line)
         if n and counts is not None:
             counts[name] = counts.get(name, 0) + n
@@ -33,9 +45,9 @@ def redact_line(line, counts=None):
     return line
 
 
-def redact_stream(lines, counts=None):
+def redact_stream(lines, counts=None, rules=None):
     for line in lines:
-        yield redact_line(line, counts)
+        yield redact_line(line, counts, rules)
 
 
 def main(argv=None):
@@ -43,13 +55,16 @@ def main(argv=None):
     p.add_argument("input", nargs="?", help="input file (default: stdin)")
     p.add_argument("-o", "--output", help="output file (default: stdout)")
     p.add_argument("--stats", action="store_true", help="print redaction counts to stderr")
+    p.add_argument("--pattern", action="append", metavar="REGEX",
+                   help="extra regex to redact; repeatable")
     args = p.parse_args(argv)
 
+    rules = RULES + custom_rules(args.pattern)
     src = open(args.input, encoding="utf-8", errors="replace") if args.input else sys.stdin
     counts = {} if args.stats else None
     out = open(args.output, "w", encoding="utf-8") if args.output else sys.stdout
     try:
-        for line in redact_stream(src, counts):
+        for line in redact_stream(src, counts, rules):
             out.write(line)
     finally:
         if src is not sys.stdin:

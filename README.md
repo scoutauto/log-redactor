@@ -21,3 +21,9 @@ This is a pattern-based filter, not a guarantee. Review the output before you pu
 ## Support
 
 Free to use. Paid support or custom patterns on request.
+
+## Usage
+
+See [USAGE.md](USAGE.md) for examples and the list of patterns it redacts.
+
+Note: this is a pattern-based redactor. Review its output before sharing logs.

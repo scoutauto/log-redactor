@@ -1,33 +1,23 @@
-# Log Redactor
+# Log Redactor v0.1
 
-A dependency-free Python tool that masks common secrets and PII in log text.
+Removes common secrets and personal data (API keys, tokens, emails, IP addresses) from log files before you share them in tickets, forums, or bug reports.
 
-## What it redacts
-- Email addresses -> `[REDACTED:email]`
-- IPv4 addresses -> `[REDACTED:ip]`
-- AWS access key IDs (AKIA/ASIA) -> `[REDACTED:aws_key]`
-- JWTs -> `[REDACTED:jwt]`
-- `Bearer` tokens -> `Bearer [REDACTED:token]`
-- `password=`, `secret=`, `api_key=`, `token=` values -> `[REDACTED]`
-- Card-like digit sequences -> `[REDACTED:card]`
+## Use
 
-## Usage
-```
-python3 redact.py input.log -o clean.log
-cat app.log | python3 redact.py --stats
-```
+    python3 log-redact.py input.log > clean.log
 
-## Web demo (stdlib HTTP server)
-```
-python3 web_demo.py 8080
-```
-Then open http://127.0.0.1:8080, paste log lines, and submit.
+- Standard library only, Python 3.8+, no network calls
+- Tests included (8/8 passing)
+- Patterns are plain regexes you can read and change
 
-## Tests
-```
-python3 test_redact.py
-```
+## Verify the download
+
+    sha256sum -c SHA256SUMS
 
 ## Limits
-Pattern-based, so it can miss unusual secret formats and can over-match some digit runs.
-Review output before sharing logs publicly.
+
+This is a pattern-based filter, not a guarantee. Review the output before you publish it.
+
+## Support
+
+Free to use. Paid support or custom patterns on request.

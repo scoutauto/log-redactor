@@ -1,3 +1,4 @@
-2026-11-04 05:10:02 INFO user=alice@example.com login ok from 203.0.113.45
-2026-11-04 05:10:03 DEBUG request token=sk_live_EXAMPLE1234567890abcd
-2026-11-04 05:10:04 ERROR retry failed for 198.51.100.7
+2026-11-04 10:12:01 INFO login user=alice@example.com from 203.0.113.7
+2026-11-04 10:12:02 DEBUG Authorization: Bearer abcdef1234567890XYZ
+2026-11-04 10:12:03 ERROR connect db-prod-42.internal password=hunter2
+2026-11-04 10:12:04 INFO order for CUST-123456 shipped, AKIAABCDEFGHIJKLMNOP used

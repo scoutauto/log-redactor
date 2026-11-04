@@ -1,4 +1,4 @@
-Login ok user=[REDACTED:email] ip=[REDACTED:ip]
-api_key=[REDACTED]
-Authorization: Bearer [REDACTED:token]
-password=[REDACTED] retry=3
+2026-11-04 10:12:01 INFO login user=[REDACTED:email] from [REDACTED:ip]
+2026-11-04 10:12:02 DEBUG Authorization: Bearer [REDACTED:token]
+2026-11-04 10:12:03 ERROR connect [REDACTED:custom] password=[REDACTED]
+2026-11-04 10:12:04 INFO order for [REDACTED:custom] shipped, [REDACTED:aws_key] used
